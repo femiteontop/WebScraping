@@ -1,4 +1,4 @@
-# Scraping github to extract profile picture
+# Scraping github to extract user name and profile picture
 
 from bs4 import BeautifulSoup
 import requests
@@ -11,6 +11,7 @@ data_request = requests.get(github_url)
 soup = BeautifulSoup(data_request.content, 'html.parser')
 
 profile_picture = soup.find('img', {'style': 'height:auto;'})['src']
+user_name = soup.find(class_='p-name').get_text()
 
-print(f"Follow below link to {username}'s Github profile picture")
+print(user_name)
 print(profile_picture)
